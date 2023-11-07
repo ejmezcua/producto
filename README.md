@@ -155,8 +155,10 @@ Para ejecutar el fichero jar:
 			}
 
 # Datos de la base de datos en memoria:
-<h5><code>brand_id	price_list	start_date		end_date		product_id	priority	price	curr
-1		  1		2020-06-14-00.00.00	2020-12-31-23.59.59	35455		0		35.50	EUR
-1		  2		2020-06-14-15.00.00	2020-06-14-18.30.00	35455		1		25.45	EUR
-1		  3		2020-06-15-00.00.00	2020-06-15-11.00.00	35455		1		30.50	EUR
-1		  4		2020-06-15-16.00.00	2020-12-31-23.59.59	35455		1		38.95	EUR</code></h5>
+La base de datos se ha construido con una única tabla para satisfacer las necesidades de la prueba. Lo ideal sería tener tablas adicionales para producto, brand y price_list (tarifas) con datos específicos de cada entidad, siendo brand_id, price_list y product_id identificadores ajenos a la tabla prices. De todos modos, todo dependería de la funcionalidad que necesitara la aplicación, y por el momento, hemos optado por tener una única clave primaria para esta tabla prices, auntoincrementable. Sus datos iniciales son:
+
+<h6><code>id	brand_id	price_list	start_date		end_date		product_id	priority	price	curr
+1	1		  1		2020-06-14-00.00.00	2020-12-31-23.59.59	35455		0		35.50	EUR
+2	1		  2		2020-06-14-15.00.00	2020-06-14-18.30.00	35455		1		25.45	EUR
+3	1		  3		2020-06-15-00.00.00	2020-06-15-11.00.00	35455		1		30.50	EUR
+4	1		  4		2020-06-15-16.00.00	2020-12-31-23.59.59	35455		1		38.95	EUR</code></h6>
