@@ -78,6 +78,7 @@ public class ProductoDaoImpl implements ProductoDao {
 	private Producto getProducto(ResultSet resultSet) throws SQLException {
 		Producto producto;
 		producto = new Producto();
+		producto.setId(resultSet.getLong(AppConstants.FILE_ID));
 		producto.setProductId(resultSet.getString(AppConstants.FILE_PRODUCT_ID));
 		producto.setBrandId(resultSet.getLong(AppConstants.FILE_BRAND_ID));
 		producto.setPriceList(resultSet.getLong(AppConstants.FILE_PRICE_LIST));

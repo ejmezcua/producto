@@ -10,6 +10,7 @@ class ProductoTest {
 	void testGettersAndSetters() {
 		Producto producto = new Producto();
 
+		producto.setId(1L);
 		producto.setBrandId(1111L);
 		producto.setPriceList(2222L);
 		producto.setStartDate("2023-11-06-00.00.00");
@@ -19,6 +20,7 @@ class ProductoTest {
 		producto.setPrice(100.0);
 		producto.setCurr("EUR");
 
+		assertEquals(1L, producto.getId());
 		assertEquals(1111L, producto.getBrandId());
 		assertEquals(2222L, producto.getPriceList());
 		assertEquals("2023-11-06-00.00.00", producto.getStartDate());

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Producto {
 
+	@JsonIgnore
+	private Long id;
+
 	private Long brandId;
 
 	private Long priceList;
@@ -22,6 +25,14 @@ public class Producto {
 	@JsonIgnore
 	private String curr;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public Long getBrandId() {
 		return brandId;
 	}

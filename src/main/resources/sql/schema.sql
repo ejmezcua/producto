@@ -1,5 +1,6 @@
 -- Tables
 CREATE TABLE IF NOT EXISTS prices (
+	id INT AUTO_INCREMENT PRIMARY KEY,
 	brand_id INT,
 	price_list INT,
 	start_date TIMESTAMP,
@@ -7,8 +8,7 @@ CREATE TABLE IF NOT EXISTS prices (
 	product_id VARCHAR(50),
 	priority INT,
 	price DOUBLE,
-	curr VARCHAR(5),
-	PRIMARY KEY (brand_id, price_list)
+	curr VARCHAR(5)
 );
 
 -- Inserts
