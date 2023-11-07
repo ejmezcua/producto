@@ -14,6 +14,10 @@ y envía como respuesta una cadena en formato json con un conjunto de elementos 
 
 	identificador de producto, identificador de cadena, tarifa a aplicar, fechas de aplicación y precio final.
 
+Otra alternativa, quizá más académica, podría haber sido el envío del "identificador_del_producto" como ahora, por @PathVariable, pero "tiempo" e "identificador_de_cadena" por @RequestParam, para incidir en que la búsqueda es del producto, y la fecha y brand son modificadores del resultado para ese producto. La llamada habría sido:
+
+	api/producto/{identificador_del_producto}?tiempo=valor1&cadena=valor2
+
  # Especificaciones técnicas y dependencias
 Java 11.
 
