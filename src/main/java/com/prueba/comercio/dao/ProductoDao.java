@@ -1,10 +1,12 @@
 package com.prueba.comercio.dao;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 import com.prueba.comercio.model.Producto;
 
 public interface ProductoDao {
 
-	public List<Producto> findByFechaProductoIdCadenaId(String fechaAplicacion, String productoId, Long brandId);
+	public Optional<Producto> findByFechaProductoIdCadenaId(LocalDateTime fechaAplicacion, String productId,
+			Long brandId);
 }

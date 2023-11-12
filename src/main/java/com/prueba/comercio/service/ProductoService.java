@@ -1,10 +1,8 @@
 package com.prueba.comercio.service;
 
-import java.util.List;
-
-import com.prueba.comercio.model.Producto;
+import com.prueba.comercio.dto.ProductoDTO;
 
 public interface ProductoService {
 
-	public List<Producto> findByFechaProductoIdCadenaId(String fechaAplicacion, String productoId, String brandId);
+	public ProductoDTO findByFechaProductoIdCadenaId(String fechaAplicacion, String productoId, String brandId);
 }

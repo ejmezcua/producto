@@ -10,7 +10,7 @@ Proyecto que almacena, en una base de datos en memoria del tipo H2, datos de tar
 			{identificador_del_producto} es el identificador código de producto (Ejemplo: 35455)
 			{identificador_de_cadena} es el identificador de la cadena del grupo (Ejemplo: 1)
 
-y envía como respuesta una cadena en formato json con un conjunto de elementos conteniendo:
+y envía como respuesta una cadena en formato json con un elemento conteniendo:
 
 	identificador de producto, identificador de cadena, tarifa a aplicar, fechas de aplicación y precio final.
 
@@ -51,84 +51,74 @@ Para ejecutar el fichero jar:
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-14-10.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
-			[
-				{
-					"brandId": 1,
-					"priceList": 1,
-					"startDate": "2020-06-14-00.00.00",
-					"endDate": "2020-12-31-23.59.59",
-					"productId": "35455",
-					"price": 35.5
-				}
-			]
+			{
+				"brandId": 1,
+				"priceList": 1,
+				"startDate": "2020-06-14-00.00.00",
+				"endDate": "2020-12-31-23.59.59",
+				"productId": "35455",
+				"price": 35.5
+			}
 
   ## TEST 2: Petición a las 16:00 del día 14 del producto 35455, para la brand 1 (ZARA)
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-14-16.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
-			[
-				{
-					"brandId": 1,
-					"priceList": 2,
-					"startDate": "2020-06-14-15.00.00",
-					"endDate": "2020-06-14-18.30.00",
-					"productId": "35455",
-					"price": 25.45
-				}
-			]
+			{
+				"brandId": 1,
+				"priceList": 2,
+				"startDate": "2020-06-14-15.00.00",
+				"endDate": "2020-06-14-18.30.00",
+				"productId": "35455",
+				"price": 25.45
+			}
 
   ## TEST 3: Petición a las 21:00 del día 14 del producto 35455, para la brand 1 (ZARA)
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-14-21.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
-			[
-				{
-					"brandId": 1,
-					"priceList": 1,
-					"startDate": "2020-06-14-00.00.00",
-					"endDate": "2020-12-31-23.59.59",
-					"productId": "35455",
-					"price": 35.5
-				}
-			]
+			{
+				"brandId": 1,
+				"priceList": 1,
+				"startDate": "2020-06-14-00.00.00",
+				"endDate": "2020-12-31-23.59.59",
+				"productId": "35455",
+				"price": 35.5
+			}
   
   ## TEST 4: Petición a las 10:00 del día 15 del producto 35455, para la brand 1 (ZARA)
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-15-10.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
-			[
-				{
-					"brandId": 1,
-					"priceList": 3,
-					"startDate": "2020-06-15-00.00.00",
-					"endDate": "2020-06-15-11.00.00",
-					"productId": "35455",
-					"price": 30.5
-				}
-			]
+			{
+				"brandId": 1,
+				"priceList": 3,
+				"startDate": "2020-06-15-00.00.00",
+				"endDate": "2020-06-15-11.00.00",
+				"productId": "35455",
+				"price": 30.5
+			}
 
   ## TEST 5: Petición a las 21:00 del día 16 del producto 35455, para la brand 1 (ZARA)
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-16-21.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
-			[
-				{
-					"brandId": 1,
-					"priceList": 4,
-					"startDate": "2020-06-15-16.00.00",
-					"endDate": "2020-12-31-23.59.59",
-					"productId": "35455",
-					"price": 38.95
-				}
-			]
+			{
+				"brandId": 1,
+				"priceList": 4,
+				"startDate": "2020-06-15-16.00.00",
+				"endDate": "2020-12-31-23.59.59",
+				"productId": "35455",
+				"price": 38.95
+			}
   
   ## TEST 6: Fallo de petición a una fecha incorrecta del producto 35455, para la brand 1 (ZARA)
   		Petición: 
   			http://localhost:8080/api/producto/XYZ2020-06-16-21.00.00/35455/1
-  		Respuesta:	(Status: 404-Not Found)
+  		Respuesta:	(Status: 400-Bad Request)
 			{
 				"timestamp": "2023-11-06T18:11:12.3252427",
-				"message": "No se encontró el producto 35455 para la fecha XYZ2020-06-16-21.00.00 y brand 1."
+				"message": "Formato inválido de la fecha de aplicación: XYZ2020-06-16-21.00.00"
 			}
 
   ## TEST 7: Fallo de petición a las 21:00 del día 16 del producto 3545544, para la brand 1 (ZARA)
@@ -137,7 +127,7 @@ Para ejecutar el fichero jar:
   		Respuesta:	(Status: 404-Not Found)
 			{
 				"timestamp": "2023-11-06T18:14:24.282736",
-				"message": "No se encontró el producto 3545544 para la fecha 2020-06-16-21.00.00 y brand 1."
+				"message": "No se encontró el producto 3545544 para la fecha 2020-06-16-21.00.00 y brand 1"
 			}
 
   ## TEST 8: Fallo de petición a las 21:00 del día 16 del producto 35455, para la brand 133
@@ -146,7 +136,7 @@ Para ejecutar el fichero jar:
   		Respuesta:	(Status: 404-Not Found)
 			{
 				"timestamp": "2023-11-06T18:13:03.4715305",
-				"message": "No se encontró el producto 35455 para la fecha 2020-06-16-21.00.00 y brand 133."
+				"message": "No se encontró el producto 35455 para la fecha 2020-06-16-21.00.00 y brand 133"
 			}
 
   ## TEST 9: Fallo de petición a las 21:00 del día 16 del producto 3545544, para la brand 1XYZ
@@ -155,7 +145,7 @@ Para ejecutar el fichero jar:
   		Respuesta:	(Status: 400-Bad Request)
 			{
 				"timestamp": "2023-11-06T18:16:28.9606437",
-				"message": "Formato inválido de la cadena: 'brand_id'"
+				"message": "Formato inválido de brand: 1XYZ, y se espera valor numérico"
 			}
 
 # Datos de la base de datos en memoria:
