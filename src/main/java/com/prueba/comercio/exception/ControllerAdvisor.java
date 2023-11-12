@@ -26,8 +26,8 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(NoFormatDataException.class)
-	public ResponseEntity<Object> handleNoFormatDataException(NoFormatDataException ex, WebRequest request) {
+	@ExceptionHandler(NoFormatBrandException.class)
+	public ResponseEntity<Object> handleNoFormatBrandException(NoFormatBrandException ex, WebRequest request) {
 
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put(TIMESTAMP, LocalDateTime.now());
@@ -35,9 +35,19 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(NoFormatDateException.class)
+	public ResponseEntity<Object> handleNoFormatDateException(NoFormatDateException ex, WebRequest request) {
+		
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put(TIMESTAMP, LocalDateTime.now());
+		body.put(MESSAGE, ex.getMessage());
+		
+		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+	}
 
 	@ExceptionHandler(NoDataFoundException.class)
-	public ResponseEntity<Object> handleNodataFoundException(NoDataFoundException ex, WebRequest request) {
+	public ResponseEntity<Object> handleNoDataFoundException(NoDataFoundException ex, WebRequest request) {
 
 		Map<String, Object> body = new LinkedHashMap<>();
 		body.put(TIMESTAMP, LocalDateTime.now());

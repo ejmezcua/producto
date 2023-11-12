@@ -6,14 +6,15 @@ public final class AppConstants {
 	public static final String SCHEMA_SQL = "sql/schema.sql";
 
 	public static final String NOT_FOUND = "error.request.notfound";
-	public static final String NO_FORMAT = "error.request.noformat";
+	public static final String NO_FORMAT_BRAND = "error.request.noformat.brand";
+	public static final String NO_FORMAT_DATE = "error.request.noformat.date";
 	public static final String NO_DATA = "error.request.nodata";
 	public static final String ERR_SQL = "error.sql";
 
 	public static final String PRODUCTO_EXCEPTION = "producto.exception";
 
 	public static final String DATE_FORMAT = "yyyy-MM-dd-HH.mm.ss";
-	
+
 	public static final String FILE_ID = "id";
 	public static final String FILE_PRICE = "price";
 	public static final String FILE_END_DATE = "end_date";

@@ -22,6 +22,8 @@ class ControllerAdvisorTest {
 
 	private ControllerAdvisor controllerAdvisor;
 	private ProductoNotFoundException productoNotFoundException;
+	private NoFormatBrandException noFormatBrandException;
+	private NoFormatDateException noFormatDateException;
 	private String fechaAplicacion;
 	private String productoId;
 	private String brandId;
@@ -35,7 +37,9 @@ class ControllerAdvisorTest {
 
 		controllerAdvisor = new ControllerAdvisor();
 		productoNotFoundException = new ProductoNotFoundException(fechaAplicacion, productoId, brandId);
-
+		noFormatBrandException = new NoFormatBrandException(brandId);
+		noFormatDateException = new NoFormatDateException(fechaAplicacion);
+		
 		webRequest = mock(WebRequest.class);
 	}
 
@@ -52,19 +56,30 @@ class ControllerAdvisorTest {
 	}
 
 	@Test
-	void testHandleNoFormatDataException() {
+	void testHandleNoFormatBrandException() {
 		ResponseEntity<Object> responseEntity = controllerAdvisor
-				.handleNoFormatDataException(new NoFormatDataException(), webRequest);
+				.handleNoFormatBrandException(noFormatBrandException, webRequest);
 
 		assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
 
 		Map<String, Object> responseBody = (Map<String, Object>) responseEntity.getBody();
-		assertEquals(Properties.obtenerInstancia().getString(AppConstants.NO_FORMAT), responseBody.get(MESSAGE));
+		assertEquals(MessageFormat.format(Properties.obtenerInstancia().getString(AppConstants.NO_FORMAT_BRAND), brandId), responseBody.get(MESSAGE));
+	}
+	
+	@Test
+	void testHandleNoFormatDateException() {
+		ResponseEntity<Object> responseEntity = controllerAdvisor
+				.handleNoFormatDateException(noFormatDateException, webRequest);
+		
+		assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+		
+		Map<String, Object> responseBody = (Map<String, Object>) responseEntity.getBody();
+		assertEquals(MessageFormat.format(Properties.obtenerInstancia().getString(AppConstants.NO_FORMAT_DATE), fechaAplicacion), responseBody.get(MESSAGE));
 	}
 
 	@Test
-	void testHandleNodataFoundException() {
-		ResponseEntity<Object> responseEntity = controllerAdvisor.handleNodataFoundException(new NoDataFoundException(),
+	void testHandleNoDataFoundException() {
+		ResponseEntity<Object> responseEntity = controllerAdvisor.handleNoDataFoundException(new NoDataFoundException(),
 				webRequest);
 
 		assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());

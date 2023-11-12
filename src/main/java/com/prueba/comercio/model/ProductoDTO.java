@@ -1,49 +1,30 @@
 package com.prueba.comercio.model;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+public class ProductoDTO {
 
-@Entity
-@Table(name="prices")
-public class Producto {
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	private Long id;
 
-	@Column(name="brand_id")
 	private Long brandId;
 
-	@Column(name="price_list")
 	private Long priceList;
 
-	@Column(name="start_date")
-	private LocalDateTime startDate;
+	private String startDate;
 
-	@Column(name="end_date")
-	private LocalDateTime endDate;
+	private String endDate;
 
-	@Column(name="product_id")
 	private String productId;
 
-	@Column(name="priority")
+	@JsonIgnore
 	private Integer priority;
 
-	@Column(name="price")
 	private Double price;
 
-	@Column(name="curr")
+	@JsonIgnore
 	private String curr;
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -51,7 +32,7 @@ public class Producto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public Long getBrandId() {
 		return brandId;
 	}
@@ -68,19 +49,19 @@ public class Producto {
 		this.priceList = priceList;
 	}
 
-	public LocalDateTime getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 

@@ -1,45 +1,54 @@
 package com.prueba.comercio.servicio;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
-import java.util.List;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.prueba.comercio.dao.ProductoDao;
-import com.prueba.comercio.exception.NoFormatDataException;
+import com.prueba.comercio.dto.ProductoDTO;
+import com.prueba.comercio.exception.NoFormatBrandException;
+import com.prueba.comercio.exception.NoFormatDateException;
 import com.prueba.comercio.model.Producto;
 import com.prueba.comercio.service.ProductoServiceImpl;
+import com.prueba.comercio.utils.Utilities;
 
 class ProductoServiceImplTest {
 
-	private ProductoServiceImpl servicio;
+	private ProductoServiceImpl productoService;
 	private ProductoDao productoDao;
 	private String fechaAplicacion;
 	private String productoId;
 	private String brandId;
 	private Long brandIdParsed;
+	private String brandIdError;
+	private String fechaAplicacionError;
 	private Producto producto;
 
 	@BeforeEach
 	public void setUp() {
-		servicio = new ProductoServiceImpl();
+		productoService = new ProductoServiceImpl();
 		productoDao = mock(ProductoDao.class);
 
-		servicio.setProductoDao(productoDao);
+		productoService.setProductoDao(productoDao);
 
 		fechaAplicacion = "2023-11-06-00.00.00";
 		productoId = "35455";
 		brandId = "456";
 		brandIdParsed = 456L;
+		
+		brandIdError = "invalid_brand_id";
+		fechaAplicacionError = "2023-11-0test6-00.00.00";
 
 		producto = new Producto();
 		producto.setPrice(123.12);
@@ -47,24 +56,34 @@ class ProductoServiceImplTest {
 
 	@Test
 	void testFindByFechaProductoIdCadenaId() {
-        when(productoDao.findByFechaProductoIdCadenaId(fechaAplicacion, productoId, brandIdParsed))
-            .thenReturn(Arrays.asList(producto));
+        when(productoDao.findByFechaProductoIdCadenaId(Utilities.toLocalDateTime(fechaAplicacion), productoId, brandIdParsed))
+            .thenReturn(Optional.of(producto));
 
-        List<Producto> productos = servicio.findByFechaProductoIdCadenaId(fechaAplicacion, productoId, brandId);
+        ProductoDTO result = productoService.findByFechaProductoIdCadenaId(fechaAplicacion, productoId, brandId);
 
-        assertNotNull(productos);
-        assertFalse(productos.isEmpty());
+        assertNotNull(result);
+        assertNotEquals(null, result);
     }
 
 	@Test
 	void testFindByFechaProductoIdCadenaIdWithNumberFormatException() {
-		brandId = "invalid_brand_id";
-
-		when(productoDao.findByFechaProductoIdCadenaId(anyString(), anyString(), anyLong()))
+		when(productoDao.findByFechaProductoIdCadenaId(any(), anyString(), anyLong()))
 				.thenThrow(NumberFormatException.class);
 
-		assertThrows(NoFormatDataException.class, () -> {
-			servicio.findByFechaProductoIdCadenaId(fechaAplicacion, productoId, brandId);
+		assertThrows(NoFormatBrandException.class, () -> {
+			productoService.findByFechaProductoIdCadenaId(fechaAplicacion, productoId, brandIdError);
 		});
 	}
+
+	@Test
+	void testFindByFechaProductoIdCadenaIdWithDateTimeParseException() {
+		//brandId = "invalid_brand_id";
+
+		when(productoDao.findByFechaProductoIdCadenaId(any(), anyString(), anyLong()))
+				.thenThrow(DateTimeParseException.class);
+
+		assertThrows(NoFormatDateException.class, () -> {
+			productoService.findByFechaProductoIdCadenaId(fechaAplicacionError, productoId, brandId);
+		});
+	}	
 }
