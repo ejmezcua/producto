@@ -47,7 +47,7 @@ Para ejecutar el fichero jar:
   # Ejemplos de uso:
   	Casos de prueba desde el navegador o Postman:
      
-  ## TEST 1: Petición a las 10:00 del día 14 del producto 35455, para la brand 1 (ZARA)
+  ## TEST 1: Petición a las 10:00 del día 14 del producto 35455, para la brand 1
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-14-10.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
@@ -60,7 +60,7 @@ Para ejecutar el fichero jar:
 				"price": 35.5
 			}
 
-  ## TEST 2: Petición a las 16:00 del día 14 del producto 35455, para la brand 1 (ZARA)
+  ## TEST 2: Petición a las 16:00 del día 14 del producto 35455, para la brand 1
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-14-16.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
@@ -73,7 +73,7 @@ Para ejecutar el fichero jar:
 				"price": 25.45
 			}
 
-  ## TEST 3: Petición a las 21:00 del día 14 del producto 35455, para la brand 1 (ZARA)
+  ## TEST 3: Petición a las 21:00 del día 14 del producto 35455, para la brand 1
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-14-21.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
@@ -86,7 +86,7 @@ Para ejecutar el fichero jar:
 				"price": 35.5
 			}
   
-  ## TEST 4: Petición a las 10:00 del día 15 del producto 35455, para la brand 1 (ZARA)
+  ## TEST 4: Petición a las 10:00 del día 15 del producto 35455, para la brand 1
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-15-10.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
@@ -99,7 +99,7 @@ Para ejecutar el fichero jar:
 				"price": 30.5
 			}
 
-  ## TEST 5: Petición a las 21:00 del día 16 del producto 35455, para la brand 1 (ZARA)
+  ## TEST 5: Petición a las 21:00 del día 16 del producto 35455, para la brand 1
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-16-21.00.00/35455/1
   		Respuesta:	(Status: 200 OK)
@@ -112,7 +112,7 @@ Para ejecutar el fichero jar:
 				"price": 38.95
 			}
   
-  ## TEST 6: Fallo de petición a una fecha incorrecta del producto 35455, para la brand 1 (ZARA)
+  ## TEST 6: Fallo de petición a una fecha incorrecta del producto 35455, para la brand 1
   		Petición: 
   			http://localhost:8080/api/producto/XYZ2020-06-16-21.00.00/35455/1
   		Respuesta:	(Status: 400-Bad Request)
@@ -121,7 +121,7 @@ Para ejecutar el fichero jar:
 				"message": "Formato inválido de la fecha de aplicación: XYZ2020-06-16-21.00.00"
 			}
 
-  ## TEST 7: Fallo de petición a las 21:00 del día 16 del producto 3545544, para la brand 1 (ZARA)
+  ## TEST 7: Fallo de petición a las 21:00 del día 16 del producto 3545544, para la brand 1
   		Petición: 
   			http://localhost:8080/api/producto/2020-06-16-21.00.00/3545544/1
   		Respuesta:	(Status: 404-Not Found)
